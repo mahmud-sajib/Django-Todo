@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- messages -->
+    {% if messages %}
+        {% for msg in messages%}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ msg }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    {% endif %}
+    <!-- messages -->
+
+    <!-- edit form -->
+    <form class="form-inline my-2 my-lg-0" method="POST">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" name="item" type="text" placeholder="{{ task.item }}" aria-label="Todo" required>
+        <input type="hidden" name="completed" value="{{ task.completed }}">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Update Task</button>
+    </form>
+    <!-- edit form -->
+    
+{% endblock %}

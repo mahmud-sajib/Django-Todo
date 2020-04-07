@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- messages -->
+    {% if messages %}
+        {% for msg in messages%}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ msg }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    {% endif %}
+    <!-- messages -->
+
+    <!-- task list -->
+    <table class="table table-bordered" >
+        {% for task in tasks_list%}
+            <tr>
+                {% if task.completed %}
+                <td class="striker">{{ task.item }}</td>
+                <td>Task Completed</td>
+                {% else %}
+                <td>{{ task.item }}</td>
+                <td><a href="{% url 'done' task.id %}">Mark As Done</a></td>
+                {% endif %}
+                <td><a href="{% url 'edit' task.id %}">Edit</a></td>
+                <td><a href="{% url 'delete' task.id %}">Delete</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <!-- task list -->
+    
+{% endblock %}
